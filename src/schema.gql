@@ -1,0 +1,60 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type OrderModel {
+  id: String!
+  userId: String!
+  amount: Float!
+  status: OrderStatus!
+}
+
+enum OrderStatus {
+  Created
+  Executed
+}
+
+type UserModel {
+  id: String!
+  name: String!
+  location: String!
+  age: Int!
+  orders: [OrderModel!]!
+}
+
+type Query {
+  user(id: String!): UserModel!
+  users: [UserModel!]!
+  order(id: String!): OrderModel!
+}
+
+type Mutation {
+  createUser(createUserRequest: CreateUserRequest!): UserModel!
+  updateUser(updateUserRequest: UpdateUserRequest!): UserModel!
+  createOrder(createOrderRequest: CreateOrderRequest!): OrderModel!
+}
+
+input CreateUserRequest {
+  age: Int!
+  name: String!
+  location: String!
+}
+
+input UpdateUserRequest {
+  age: Int
+  name: String
+  location: String
+  id: String!
+}
+
+input CreateOrderRequest {
+  amount: Float!
+  userId: String!
+}
+
+type Subscription {
+  userCreated: UserModel!
+  userUpdated: UserModel!
+  orderCreated: OrderModel!
+  orderUpdated: OrderModel!
+}
